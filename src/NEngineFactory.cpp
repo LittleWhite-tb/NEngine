@@ -1,6 +1,6 @@
 #ifndef DOXYGEN_IGNORE_TAG
 /**
-OpenAWars is an open turn by turn strategic game aiming to recreate the feeling of advance (famicon) wars (c)
+NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
 Copyright (C) 2010-2013  Alexandre LAURENT
 
 This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-website: http://code.google.com/p/openawars/
+website: https://github.com/LittleWhite-tb/NEngine
 e-mail: lw.demoscene@gmail.com
 **/
 #endif
@@ -34,7 +34,7 @@ NE::NEngine* NE::NEngineFactory::createNEngine(NE::EngineType type)
             return new NE::SDL_Engine();
             break;
     }
-    
+
     return NULL;
 }
 

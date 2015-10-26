@@ -3,8 +3,8 @@
 
 #ifndef DOXYGEN_IGNORE_TAG
 /**
-OpenAWars is an open turn by turn strategic game aiming to recreate the feeling of advance (famicon) wars (c)
-Copyright (C) 2010-2011  Alexandre LAURENT
+NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
+Copyright (C) 2010-2015  Alexandre LAURENT
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-website: http://code.google.com/p/openawars/
+website: https://github.com/LittleWhite-tb/NEngine
 e-mail: lw.demoscene@gmail.com
 **/
 #endif
@@ -42,10 +42,10 @@ namespace NE
 	class Sprite;
 	class SpriteLoader;
 	class SpriteFactory;
-	
+
 	class SoundLoader;
 	class SoundEngine;
-    
+
 	class NEngine
 	{
     private:
@@ -60,13 +60,13 @@ namespace NE
 
 		SpriteLoader* pSpriteLoader;	/*!< SpriteLoader used by the Engine */
 		SpriteFactory* pSpriteFactory;	/*!< SpriteFactory used by the Engine */
-		
+
 		SoundLoader* pSoundLoader;
 		SoundEngine* pSoundEngine;
 
         virtual bool initAPI(void)=0;
 		virtual bool stopAPI(void)=0;
-        
+
 	public:
 		NEngine(void) {}
 		virtual ~NEngine(void) {}
@@ -79,7 +79,7 @@ namespace NE
 
         SpriteLoader* getSpriteLoader(void) { return pSpriteLoader; }
         SpriteFactory* getSpriteFactory(void) { return pSpriteFactory; }
-        
+
         SoundEngine* getSoundEngine(void) { return pSoundEngine; }
 
 		Renderer* getRenderer(void) { return pRenderer; }
@@ -114,12 +114,12 @@ namespace NE
 
 /*! \fn virtual NE::NEngine::~NEngine(void)
  */
- 
+
 /*! \fn virtual bool NE::NEngine::initAPI(void)=0
  * Init the API (internal)
  * \return true if all goes right
  */
- 
+
  /*! \fn virtual bool NE::NEngine::stopAPI(void)=0
  * Stop the API (internal)
  * \return true if all goes right
@@ -144,7 +144,7 @@ namespace NE
  * \brief Get the SpriteLoader
  * \return a pointer to the SpriteLoader
  */
- 
+
  /*! \fn virtual NE::SpriteFactory* NE::NEngine::getSpriteFactory(void)
  * \brief Get the SpriteFactory
  * \return a pointer to the SpriteFactory

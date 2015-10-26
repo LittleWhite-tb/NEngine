@@ -1,7 +1,7 @@
 #ifndef DOXYGEN_IGNORE_TAG
 /**
-OpenAWars is an open turn by turn strategic game aiming to recreate the feeling of advance (famicon) wars (c)
-Copyright (C) 2010-2011  Alexandre LAURENT
+NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
+Copyright (C) 2010-2015  Alexandre LAURENT
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-website: http://code.google.com/p/openawars/
+website: https://github.com/LittleWhite-tb/NEngine
 e-mail: lw.demoscene@gmail.com
 **/
 #endif
@@ -33,10 +33,10 @@ e-mail: lw.demoscene@gmail.com
 const NE::Sprite* NE::SpriteLoader::loadSpriteFromFile(const std::string& fileName)
 {
     const NE::Sprite* pSprite = m_bank.get(fileName);
-    
+
     if ( pSprite == NULL ) // It was not in the bank
     {
-        for ( std::list<NE::ISpriteLoader*>::const_iterator itLoader = m_loaders.begin() ; 
+        for ( std::list<NE::ISpriteLoader*>::const_iterator itLoader = m_loaders.begin() ;
             itLoader != m_loaders.end() ;
             ++itLoader )
         {
@@ -55,6 +55,6 @@ const NE::Sprite* NE::SpriteLoader::loadSpriteFromFile(const std::string& fileNa
             throw FileNotFoundException(fileName);
         }
     }
-    
+
     return pSprite;
 }

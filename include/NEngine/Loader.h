@@ -3,8 +3,8 @@
 
 #ifndef DOXYGEN_IGNORE_TAG
 /**
-OpenAWars is an open turn by turn strategic game aiming to recreate the feeling of advance (famicon) wars (c)
-Copyright (C) 2010-2011  Alexandre LAURENT
+NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
+Copyright (C) 2010-2015  Alexandre LAURENT
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-website: http://code.google.com/p/openawars/
+website: https://github.com/LittleWhite-tb/NEngine
 e-mail: lw.demoscene@gmail.com
 **/
 #endif
@@ -34,11 +34,11 @@ namespace NE
 	{
 		protected:
 			std::list<T*> m_loaders;
-		
+
 		public:
 			virtual ~Loader()
 			{
-				for ( typename std::list<T*>::const_iterator itLoader = m_loaders.begin() ; 
+				for ( typename std::list<T*>::const_iterator itLoader = m_loaders.begin() ;
 					itLoader != m_loaders.end() ;
 					++itLoader )
 				{
@@ -47,7 +47,7 @@ namespace NE
 
 				m_loaders.clear();
 			}
-			
+
 			void registerLoader(T* pLoader)
 			{
 				assert(pLoader);

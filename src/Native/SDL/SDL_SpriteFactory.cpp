@@ -1,7 +1,7 @@
 #ifndef DOXYGEN_IGNORE_TAG
 /**
-OpenAWars is an open turn by turn strategic game aiming to recreate the feeling of advance (famicon) wars (c)
-Copyright (C) 2010-2011  Alexandre LAURENT
+NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
+Copyright (C) 2010-2015  Alexandre LAURENT
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-website: http://code.google.com/p/openawars/
+website: https://github.com/LittleWhite-tb/NEngine
 e-mail: lw.demoscene@gmail.com
 **/
 #endif
@@ -51,7 +51,7 @@ NE::Sprite* NE::SDL_SpriteFactory :: createSprite(const Colour& colour, const US
 		LWarning << "SDL_SetAlpha failed for putting half alpha on the bar";
 	}
 */
-	
+
 	unsigned int* pPixel = reinterpret_cast<unsigned int*>(pSurface->pixels);
 	for ( int i = 0 ; i < pSurface->w * pSurface->h ; i++ )
 	{
@@ -62,6 +62,6 @@ NE::Sprite* NE::SDL_SpriteFactory :: createSprite(const Colour& colour, const US
 #endif
 		pPixel++;
 	}
-    
+
     return new SDL_Sprite(pSurface);
 }
