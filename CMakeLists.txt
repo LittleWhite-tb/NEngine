@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-
-project(NEngine)
-
 cmake_policy(SET CMP0015 NEW)
+
+project(NEngine LANGUAGES CXX)
 
 SET(CMAKE_CXX_WARNING_LEVEL 4)
 if (DEFINED MSYS)
@@ -16,10 +15,37 @@ endif ()
 include_directories(include/)
 include_directories(src/)
 
-file(
-	GLOB_RECURSE
-    NEngine_sources
-	src/*
+set(NEngine_sources
+
+	src/Bank.cpp
+	src/InputManager.cpp
+	src/ISoundLoader.cpp
+	src/ISpriteLoader.cpp
+	src/NEngine.cpp
+	src/NEngineFactory.cpp
+	src/Renderer.cpp
+	src/SoundEngine.cpp
+	src/SoundLoader.cpp
+	src/SpriteFactory.cpp
+	src/SpriteLoader.cpp
+	
+	src/Types/Colour.cpp
+	
+	src/Native/SDL/SDL_Engine.cpp
+	src/Native/SDL/SDL_Joy.cpp
+	src/Native/SDL/SDL_Keyboard.cpp
+	src/Native/SDL/SDL_NThread.cpp
+	src/Native/SDL/SDL_Renderer.cpp
+	src/Native/SDL/SDL_Semaphore.cpp
+	src/Native/SDL/SDL_Sound.cpp
+	src/Native/SDL/SDL_SoundEngine.cpp
+	src/Native/SDL/SDL_SoundLoader.cpp
+	src/Native/SDL/SDL_Sprite.cpp
+	src/Native/SDL/SDL_SpriteFactory.cpp
+	src/Native/SDL/SDL_SpriteLoader.cpp
+	src/Native/SDL/SDL_SpriteLoaderSDLI.cpp
+	src/Native/SDL/SDL_Time.cpp
+	src/Native/SDL/SDL_Window.cpp
 )
 
 add_library(
