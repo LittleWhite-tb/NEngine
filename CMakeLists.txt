@@ -67,9 +67,6 @@ SET_TARGET_PROPERTIES(NEngine-static PROPERTIES OUTPUT_NAME "NEngine")
 # so we add a "lib" prefix (which is default on other platforms anyway):
 SET_TARGET_PROPERTIES(NEngine-static PROPERTIES PREFIX "lib")
 
-include_directories(./include)
-link_directories(./lib)
-
 # Finding libraries
 find_package (SDL QUIET)
 if (NOT SDL_FOUND)
