@@ -43,6 +43,13 @@ struct Vec2
 	*/
 	Vec2(const T& x, const T& y):x(x),y(y) {}
 
+    //! Constructor from other vector
+    /*!
+        \param v the vector to convert
+    */
+	template <typename U>
+	Vec2(const U& v):x(v.x),y(v.y) {}
+
     bool operator==(const Vec2<T>& v)const
     {
         if ( v.x == this->x && v.y == this->y )
