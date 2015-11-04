@@ -43,10 +43,9 @@ namespace NE
             ~SDL_Keyboard(void);
 
             NE::InputManager::ArrowsDirection getDirectionsPressed(void)const;
+            bool isPressed(NE::InputManager::Button button);
 
             bool needEscape(void);
-
-            NE::InputManager::Buttons getButtonsState(void);
 
             void update(void);
     };
@@ -88,7 +87,7 @@ namespace NE
  * \return true if the program should escape
  */
 
-/*! \fn InputManager::Buttons NE::SDL_Keyboard::getButtonsState(void)
+/*! \fn bool NE::SDL_Keyboard::getButtonsState(InputManager::Buttons button)
  */
 
 /*! \fn void NE::SDL_Keyboard::update(void)

@@ -88,44 +88,42 @@ NE::InputManager::ArrowsDirection NE::SDL_Keyboard :: getDirectionsPressed(void)
         return InputManager::AD_NONE;
 }
 
-NE::InputManager::Buttons NE::SDL_Keyboard :: getButtonsState(void)
+bool NE::SDL_Keyboard::isPressed(NE::InputManager::Button button)
 {
-	InputManager::Buttons buttonPressed = 0;
+    if ( button == InputManager::INPUT_A && m_pKeys[SDLK_q] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_B && m_pKeys[SDLK_w] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_X && m_pKeys[SDLK_a] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_Y && m_pKeys[SDLK_s] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_START && m_pKeys[SDLK_z] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_SELECT && m_pKeys[SDLK_x] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_VOLUMEDOWN && m_pKeys[SDLK_KP_MINUS] )
+    {
+        return true;
+    }
+    if ( button == InputManager::INPUT_VOLUMEUP && m_pKeys[SDLK_KP_PLUS] )
+    {
+        return true;
+    }
 
-	if ( m_pKeys[SDLK_q] )
-	{
-		buttonPressed |= InputManager::INPUT_A;
-	}
-	if ( m_pKeys[SDLK_w] )
-	{
-		buttonPressed |= InputManager::INPUT_B;
-	}
-	if ( m_pKeys[SDLK_a] )
-	{
-		buttonPressed |= InputManager::INPUT_X;
-	}
-	if ( m_pKeys[SDLK_s] )
-	{
-		buttonPressed |= InputManager::INPUT_Y;
-	}
-	if ( m_pKeys[SDLK_z] )
-	{
-		buttonPressed |= InputManager::INPUT_START;
-	}
-	if ( m_pKeys[SDLK_x] )
-	{
-		buttonPressed |= InputManager::INPUT_SELECT;
-	}
-	if ( m_pKeys[SDLK_KP_MINUS] )
-	{
-		buttonPressed |= InputManager::INPUT_VOLUMEDOWN;
-	}
-	if ( m_pKeys[SDLK_KP_PLUS] )
-	{
-		buttonPressed |= InputManager::INPUT_VOLUMEUP;
-	}
-
-	return buttonPressed;
+    return false;
 }
 
 unsigned char NE::SDL_Keyboard :: isKey(unsigned int key)

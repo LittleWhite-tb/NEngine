@@ -35,7 +35,7 @@ namespace NE
 		virtual ~Input() {};
 
 		virtual NE::InputManager::ArrowsDirection getDirectionsPressed(void)const=0;
-		virtual NE::InputManager::Buttons getButtonsState(void)=0;
+		virtual bool isPressed(NE::InputManager::Button button)=0;
 		virtual bool needEscape(void)=0;
 		virtual void update(void)=0;
 	};
@@ -49,13 +49,13 @@ namespace NE
  */
 
 /*! \fn virtual InputManager::ArrowsDirection NE::Input::getDirectionsPressed(void)const=0
- * \brief Gets the directions
+ * \brief Get the directions
  * \return the directions pressed
  */
 
-/*! \fn virtual InputManager::Buttons NE::Input::getButtonsState(void)=0
- * \brief Gets the buttons pressed
- * \return the buttons pressed
+/*! \fn virtual bool NE::Input::isPressed(NE::InputManager::Button button)=0
+ * \brief Get the actual state (pressed or not) of the button \a button
+ * \return true if the button \a button is pressed
  */
 
 /*! \fn virtual bool NE::Input::needEscape(void)=0

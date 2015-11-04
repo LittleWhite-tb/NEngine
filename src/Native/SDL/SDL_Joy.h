@@ -13,24 +13,23 @@ namespace NE
     private:
         SDL_Joystick* m_pJoy;
         InputManager::ArrowsDirection m_directions;
-        InputManager::Buttons m_buttons;
 
         void updateDirections();
-        void updateButtons();
 
     public:
         SDL_Joy();
         ~SDL_Joy();
 
         NE::InputManager::ArrowsDirection getDirectionsPressed(void)const { return m_directions; }
-        NE::InputManager::Buttons getButtonsState(void) { return m_buttons; };
+        bool isPressed(NE::InputManager::Button button);
+
         bool needEscape(void);
         void update(void);
     };
 }
 
 /*! \class NE::SDL_Joy SDL_Joy.h "NEngine/Native/SDL/SDL_Joy.h"
- *  \brief Handle the joystick
+ *  \brief Handle the GP2X joystick
  *
  * Can check the following:
  *              - If a special sequence is pressed (to escape)
@@ -60,7 +59,7 @@ namespace NE
  * \return true if the program should escape
  */
 
-/*! \fn InputManager::Buttons NE::SDL_Joy::getButtonsState(void)
+/*! \fn bool NE::SDL_Joy::isPressed(NE::InputManager::Button button)
  */
 
 /*! \fn void NE::SDL_Joy::update(void)

@@ -37,7 +37,7 @@ namespace NE
 	public:
 
 		typedef int ArrowsDirection;                    /*!< Direction to go */
-		typedef int Buttons;                            /*!< Buttons pressed */
+		typedef int Button;                            /*!< Buttons pressed */
 
 		// Bit field definition for arrows direction
 		static const ArrowsDirection AD_UP = 1;         /*!< Up Direction */
@@ -51,21 +51,30 @@ namespace NE
 		static const ArrowsDirection AD_NONE = 0;       /*!< No direction */
 
 		// Bit Field definition
-		static const Buttons INPUT_NONE = 0;            /*!< No button pressed */
-		static const Buttons INPUT_A = 1;               /*!< A button */
-		static const Buttons INPUT_B = 2;               /*!< B button */
-		static const Buttons INPUT_X = 4;               /*!< X button */
-		static const Buttons INPUT_Y = 8;               /*!< Y button */
-		static const Buttons INPUT_L = 16;              /*!< L button */
-		static const Buttons INPUT_R = 32;              /*!< R button */
-		static const Buttons INPUT_START = 64;          /*!< Start button */
-		static const Buttons INPUT_SELECT = 128;        /*!< Select button */
-		static const Buttons INPUT_VOLUMEUP = 256;      /*!< Volume UP button (GP2X) */
-		static const Buttons INPUT_VOLUMEDOWN = 512;    /*!< Volume Down button (GP2X) */
+		static const Button INPUT_A = 0;               /*!< A button */
+		static const Button INPUT_B = 1;               /*!< B button */
+		static const Button INPUT_X = 2;               /*!< X button */
+		static const Button INPUT_Y = 3;               /*!< Y button */
+		static const Button INPUT_L = 4;              /*!< L button */
+		static const Button INPUT_R = 5;              /*!< R button */
+		static const Button INPUT_START = 6;          /*!< Start button */
+		static const Button INPUT_SELECT = 7;        /*!< Select button */
+		static const Button INPUT_VOLUMEUP = 8;      /*!< Volume UP button (GP2X) */
+		static const Button INPUT_VOLUMEDOWN = 9;    /*!< Volume Down button (GP2X) */
+		static const Button B_END = INPUT_VOLUMEDOWN + 1;
+
+		enum ButtonState
+		{
+		    BS_RELEASED = 0,
+		    BS_JUSTPRESSED = 1,
+		    BS_PRESSED = 2,
+		    BS_JUSTRELEASED = 3
+		};
 
 	private:
 
 		std::vector<Input*> m_controllers;              /*!< Controllers managed */
+		std::vector<std::vector<ButtonState> > m_buttonsStates;    /*!< Buttons states */
 
 	public:
 
@@ -75,10 +84,13 @@ namespace NE
 		void registerController(NE::Input* newController);
 		void deleteControllers(void);
 
-		ArrowsDirection getDirectionsPressed(void);
-		Buttons getButtonsPressed(void);
+		std::size_t numberControllers()const { return m_controllers.size(); }
+        void update(void);
+
+		ArrowsDirection getDirectionsPressed(unsigned int controller);
+		ButtonState getButtonState(unsigned int controller, Button button);
+
 		bool needEscape(void);
-		void update(void);
 	};
 }
 

@@ -51,50 +51,60 @@ NE::SDL_Joy :: ~SDL_Joy()
     NEDebug << "Joystick deleted\n";
 }
 
-void NE::SDL_Joy :: updateButtons(void)
+bool NE::SDL_Joy :: isPressed(NE::InputManager::Button button)
 {
-    m_buttons = NE::InputManager::INPUT_NONE;
+    if ( button == NE::InputManager::INPUT_START &&
+         SDL_JoystickGetButton(m_pJoy,8) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_SELECT &&
+         SDL_JoystickGetButton(m_pJoy,9) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_R &&
+         SDL_JoystickGetButton(m_pJoy,10) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_L &&
+         SDL_JoystickGetButton(m_pJoy,11) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_A &&
+         SDL_JoystickGetButton(m_pJoy,12) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_B &&
+         SDL_JoystickGetButton(m_pJoy,13) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_Y &&
+         SDL_JoystickGetButton(m_pJoy,14) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_X &&
+         SDL_JoystickGetButton(m_pJoy,15) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_VOLUMEUP &&
+         SDL_JoystickGetButton(m_pJoy,16) )
+    {
+        return true;
+    }
+    if ( button == NE::InputManager::INPUT_VOLUMEDOWN &&
+         SDL_JoystickGetButton(m_pJoy,17) )
+    {
+        return true;
+    }
 
-    if ( SDL_JoystickGetButton(m_pJoy,8) )
-    {
-        m_buttons |= NE::InputManager::INPUT_START;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,9) )
-    {
-        m_buttons |= NE::InputManager::INPUT_SELECT;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,10) )
-    {
-        m_buttons |= NE::InputManager::INPUT_R;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,11) )
-    {
-        m_buttons |= NE::InputManager::INPUT_L;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,12) )
-    {
-        m_buttons |= NE::InputManager::INPUT_A;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,13) )
-    {
-        m_buttons |= NE::InputManager::INPUT_B;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,14) )
-    {
-        m_buttons |= NE::InputManager::INPUT_Y;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,15) )
-    {
-        m_buttons |= NE::InputManager::INPUT_X;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,16) )
-    {
-        m_buttons |= NE::InputManager::INPUT_VOLUMEUP;
-    }
-    if ( SDL_JoystickGetButton(m_pJoy,17) )
-    {
-        m_buttons |= NE::InputManager::INPUT_VOLUMEDOWN;
-    }
+    return false;
 }
 
 void NE::SDL_Joy :: updateDirections()
@@ -139,11 +149,9 @@ void NE::SDL_Joy :: updateDirections()
 
 bool NE::SDL_Joy :: needEscape(void)
 {
-    NE::InputManager::ArrowsDirection buttons = this->getButtonsState();
-
-    if ( (buttons & NE::InputManager::INPUT_R) == NE::InputManager::INPUT_R &&
-        (buttons & NE::InputManager::INPUT_L) == NE::InputManager::INPUT_L &&
-        (buttons & NE::InputManager::INPUT_START) == NE::InputManager::INPUT_START )
+    if ( this->isPressed(NE::InputManager::INPUT_R) &&
+         this->isPressed(NE::InputManager::INPUT_L) &&
+         this->isPressed(NE::InputManager::INPUT_START))
     {
         return true;
     }
@@ -156,5 +164,4 @@ void NE::SDL_Joy :: update(void)
     // Updating the joystick state
     SDL_JoystickUpdate();
     updateDirections();
-    updateButtons();
 }

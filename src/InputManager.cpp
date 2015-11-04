@@ -27,6 +27,7 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/Input.h"
 
 #include <typeinfo>
+#include <cassert>
 
 #include "NEngine/NEngine.h"
 
@@ -45,6 +46,7 @@ NE::InputManager :: ~InputManager(void)
 void NE::InputManager :: registerController(Input* newController)
 {
 	m_controllers.push_back(newController);
+	m_buttonsStates.push_back(std::vector<ButtonState>(B_END,BS_RELEASED));
 
     NEDebug << "Registered -> " << typeid(newController).name() << "\n";
 }
@@ -57,30 +59,48 @@ void NE::InputManager :: deleteControllers(void)
 	}
 
 	m_controllers.clear();
+	m_buttonsStates.clear();
 }
 
-NE::InputManager::ArrowsDirection NE::InputManager :: getDirectionsPressed()
+NE::InputManager::ArrowsDirection NE::InputManager::getDirectionsPressed(unsigned int controller)
 {
-	InputManager::ArrowsDirection directions = 0;
+    assert(controller < this->numberControllers());
 
-	for(std::vector<Input*>::const_iterator itController = m_controllers.begin() ; itController != m_controllers.end() ; ++itController)
-	{
-		directions |= (*itController)->getDirectionsPressed();
-	}
-
-	return directions;
+	return m_controllers[controller]->getDirectionsPressed();
 }
 
-NE::InputManager::Buttons NE::InputManager :: getButtonsPressed()
+NE::InputManager::ButtonState NE::InputManager::getButtonState(unsigned int controller, Button button)
 {
-	int buttons = 0;
+    assert(controller < this->numberControllers());
+    bool buttonPressed = m_controllers[controller]->isPressed(button);
 
-	for(std::vector<Input*>::const_iterator itController = m_controllers.begin() ; itController != m_controllers.end() ; ++itController)
-	{
-		buttons |= (*itController)->getButtonsState();
-	}
+    // TODO: Should this code be placed in update() ?
+    if (buttonPressed)
+    {
+        if (m_buttonsStates[controller][button] == BS_RELEASED ||
+            m_buttonsStates[controller][button] == BS_JUSTRELEASED )
+        {
+            m_buttonsStates[controller][button] = BS_JUSTPRESSED;
+        }
+        else
+        {
+            m_buttonsStates[controller][button] = BS_PRESSED;
+        }
+    }
+    else // Released
+    {
+        if (m_buttonsStates[controller][button] == BS_PRESSED ||
+            m_buttonsStates[controller][button] == BS_JUSTPRESSED )
+        {
+            m_buttonsStates[controller][button] = BS_JUSTRELEASED;
+        }
+        else
+        {
+            m_buttonsStates[controller][button] = BS_RELEASED;
+        }
+    }
 
-	return buttons;
+    return m_buttonsStates[controller][button];
 }
 
 bool NE::InputManager :: needEscape(void)
