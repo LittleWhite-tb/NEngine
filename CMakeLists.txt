@@ -4,12 +4,10 @@ cmake_policy(SET CMP0015 NEW)
 project(NEngine)
 
 SET(CMAKE_CXX_WARNING_LEVEL 4)
-if (DEFINED MSYS)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
-endif ()
-
-if (DEFINED CMAKE_COMPILER_IS_GNUCC OR DEFINED CMAKE_COMPILER_IS_GNUCXX)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+if (MSVC)
+        add_definitions("/W4")
+else()
+        add_definitions("-Wall -Wextra")
 endif ()
 
 include_directories(include/)
@@ -50,22 +48,8 @@ set(NEngine_sources
 
 add_library(
     NEngine
-	SHARED
-	${NEngine_sources}
+    ${NEngine_sources}
 )
-
-add_library(
-    NEngine-static
-	STATIC
-	${NEngine_sources}
-)
-# Since the static compilation will have same root name, with have to do some "hacky" thing
-# This is coming from CMake FAQ
-SET_TARGET_PROPERTIES(NEngine-static PROPERTIES OUTPUT_NAME "NEngine")
-# Now the library target "foo-static" will be named "foo.lib" with MS tools.
-# This conflicts with the "foo.lib" import library corresponding to "foo.dll",
-# so we add a "lib" prefix (which is default on other platforms anyway):
-SET_TARGET_PROPERTIES(NEngine-static PROPERTIES PREFIX "lib")
 
 # Finding libraries
 find_package (SDL QUIET)
@@ -95,8 +79,8 @@ include_directories(${SDLIMAGE_INCLUDE_DIR})
 target_link_libraries (NEngine ${SDLIMAGE_LIBRARY})
 
 install(DIRECTORY ./include/NEngine/
-        DESTINATION include/NEngine )
+        DESTINATION include/NEngine)
 
-install(TARGETS NEngine NEngine-static
-		ARCHIVE DESTINATION lib/
-        LIBRARY DESTINATION lib/ )
+install(TARGETS NEngine
+        ARCHIVE DESTINATION lib/
+        LIBRARY DESTINATION lib/)
