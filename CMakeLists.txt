@@ -77,10 +77,3 @@ if (NOT SDLIMAGE_FOUND)
 endif()
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 target_link_libraries (NEngine ${SDLIMAGE_LIBRARY})
-
-install(DIRECTORY ./include/NEngine/
-        DESTINATION include/NEngine)
-
-install(TARGETS NEngine
-        ARCHIVE DESTINATION lib/
-        LIBRARY DESTINATION lib/)
