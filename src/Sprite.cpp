@@ -29,12 +29,18 @@ e-mail: lw.demoscene@gmail.com
 
 bool NE::Sprite::draw(const NE::Renderer& r, const IVec2& position)const
 {
+    if (pImage == NULL)
+        return false;
+
     Rect src(orig,size);
     return r.drawSurface(position,pImage,src);
 }
 
 bool NE::Sprite::draw(const NE::Renderer& r, const IVec2& position, const Colour& mask)const
 {
+    if (pImage == NULL)
+        return false;
+
     Rect src(orig,size);
     return r.drawSurface(position,pImage,src,mask);
 }

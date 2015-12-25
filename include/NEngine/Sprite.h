@@ -42,6 +42,8 @@ namespace NE
         USize2 size;
 
     public:
+        Sprite()
+            :pImage(NULL),orig(0,0),size(0,0) {}
         Sprite(const Image* pImage)
             :pImage(pImage),orig(0,0),size(pImage->getSize()) {}
         Sprite(const Image* pImage, const IVec2& origine, const USize2& size)
