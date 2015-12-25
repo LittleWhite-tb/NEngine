@@ -48,6 +48,7 @@ namespace NE
             :pImage(pImage),orig(origine),size(size) {}
         ~Sprite() {}
 
+        const IVec2& origine()const { return orig; }
         const USize2& getSize()const { return size; }
 
         bool draw(const NE::Renderer& r, const IVec2& position);
