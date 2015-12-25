@@ -16,21 +16,27 @@ include_directories(src/)
 set(NEngine_sources
 
 	src/Bank.cpp
-	src/InputManager.cpp
-	src/ISoundLoader.cpp
         src/IImageLoader.cpp
+        src/ImageFactory.cpp
+        src/ImageLoader.cpp
+        src/InputManager.cpp
+	src/ISoundLoader.cpp
 	src/NEngine.cpp
 	src/NEngineFactory.cpp
 	src/Renderer.cpp
 	src/SoundEngine.cpp
 	src/SoundLoader.cpp
-        src/ImageFactory.cpp
-        src/ImageLoader.cpp
+        src/Sprite.cpp
+
 	
 	src/Types/Colour.cpp
 	
 	src/Native/SDL/SDL_Engine.cpp
-	src/Native/SDL/SDL_Joy.cpp
+        src/Native/SDL/SDL_Image.cpp
+        src/Native/SDL/SDL_ImageFactory.cpp
+        src/Native/SDL/SDL_ImageLoader.cpp
+        src/Native/SDL/SDL_ImageLoaderSDLI.cpp
+        src/Native/SDL/SDL_Joy.cpp
 	src/Native/SDL/SDL_Keyboard.cpp
 	src/Native/SDL/SDL_NThread.cpp
 	src/Native/SDL/SDL_Renderer.cpp
@@ -38,10 +44,6 @@ set(NEngine_sources
 	src/Native/SDL/SDL_Sound.cpp
 	src/Native/SDL/SDL_SoundEngine.cpp
 	src/Native/SDL/SDL_SoundLoader.cpp
-        src/Native/SDL/SDL_Image.cpp
-        src/Native/SDL/SDL_ImageFactory.cpp
-        src/Native/SDL/SDL_ImageLoader.cpp
-        src/Native/SDL/SDL_ImageLoaderSDLI.cpp
 	src/Native/SDL/SDL_Time.cpp
 	src/Native/SDL/SDL_Window.cpp
 )
@@ -70,7 +72,7 @@ if (NOT SDLIMAGE_FOUND)
   message(STATUS "Manual SDL-image configuration")
   set(SDLIMAGE_INCLUDE_DIR "./deps/SDL-image.bin/include")
   if (WIN32)
-	set(SDLIMAGE_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/deps/SDL-image.bin/lib/SDL_image.lib")
+        set(SDLIMAGE_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/deps/SDL-image.bin/lib/SDL_image.lib")
   else()
     message(FATAL_ERROR "SDL-image not found")
   endif()
