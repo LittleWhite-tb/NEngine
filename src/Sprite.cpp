@@ -27,13 +27,13 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/Types/Rect.h"
 #include "NEngine/Renderer.h"
 
-bool NE::Sprite::draw(const NE::Renderer& r, const IVec2& position)
+bool NE::Sprite::draw(const NE::Renderer& r, const IVec2& position)const
 {
     Rect src(orig,size);
     return r.drawSurface(position,pImage,src);
 }
 
-bool NE::Sprite::draw(const NE::Renderer& r, const IVec2& position, const Colour& mask)
+bool NE::Sprite::draw(const NE::Renderer& r, const IVec2& position, const Colour& mask)const
 {
     Rect src(orig,size);
     return r.drawSurface(position,pImage,src,mask);

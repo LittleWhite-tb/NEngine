@@ -51,8 +51,8 @@ namespace NE
         const IVec2& origine()const { return orig; }
         const USize2& getSize()const { return size; }
 
-        bool draw(const NE::Renderer& r, const IVec2& position);
-        bool draw(const NE::Renderer& r, const IVec2& position, const Colour& mask);
+        bool draw(const NE::Renderer& r, const IVec2& position)const;
+        bool draw(const NE::Renderer& r, const IVec2& position, const Colour& mask)const;
     };
 }
 
