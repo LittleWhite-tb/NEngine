@@ -1,5 +1,5 @@
-#ifndef __NE_SDL_SPRITELOADER_H__
-#define __NE_SDL_SPRITELOADER_H__
+#ifndef __NE_SDL_IMAGE_H__
+#define __NE_SDL_IMAGE_H__
 
 #ifndef DOXYGEN_IGNORE_TAG
 /**
@@ -25,23 +25,38 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "NEngine/ISpriteLoader.h"
+#include "NEngine/Image.h"
 
-#include <string>
+#include "NEngine/Types/Vec2.h"
+
+struct SDL_Surface;
 
 namespace NE
 {
-    class Sprite;
-
-    class SDL_SpriteLoader : public ISpriteLoader
+    class SDL_Image : public Image
     {
+    private:
+
+        SDL_Surface* pSurface;
+
+    protected:
+         void* getNativeImage(void)const { return pSurface; }
+
+        ~SDL_Image(void);
+
     public:
-        Sprite* loadSpriteFromFile(const std::string& fileName, const Colour& transparencyColour);
+        SDL_Image(SDL_Surface* pImage);
+
+        USize2 getSize(void)const;
     };
 }
 
-/*! \class NE::SDL_SpriteLoader SDL_SpriteLoader.h "NEngine/Native/SDL/SDL_SpriteLoader.h"
- *  \brief SDL implementation for SpriteLoader
+/*! \class NE::SDL_Image SDL_Image.h "NEngine/Native/SDL/SDL_Image.h"
+ *  \brief SDL implementation for Image
+ */
+
+/*! \fn NE::SDL_Image::SDL_Image(SDL_Surface* pSprite)
+ * \param pImage Native surface to use as Image
  */
 
 #endif

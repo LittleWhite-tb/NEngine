@@ -18,14 +18,14 @@ set(NEngine_sources
 	src/Bank.cpp
 	src/InputManager.cpp
 	src/ISoundLoader.cpp
-	src/ISpriteLoader.cpp
+        src/IImageLoader.cpp
 	src/NEngine.cpp
 	src/NEngineFactory.cpp
 	src/Renderer.cpp
 	src/SoundEngine.cpp
 	src/SoundLoader.cpp
-	src/SpriteFactory.cpp
-	src/SpriteLoader.cpp
+        src/ImageFactory.cpp
+        src/ImageLoader.cpp
 	
 	src/Types/Colour.cpp
 	
@@ -38,10 +38,10 @@ set(NEngine_sources
 	src/Native/SDL/SDL_Sound.cpp
 	src/Native/SDL/SDL_SoundEngine.cpp
 	src/Native/SDL/SDL_SoundLoader.cpp
-	src/Native/SDL/SDL_Sprite.cpp
-	src/Native/SDL/SDL_SpriteFactory.cpp
-	src/Native/SDL/SDL_SpriteLoader.cpp
-	src/Native/SDL/SDL_SpriteLoaderSDLI.cpp
+        src/Native/SDL/SDL_Image.cpp
+        src/Native/SDL/SDL_ImageFactory.cpp
+        src/Native/SDL/SDL_ImageLoader.cpp
+        src/Native/SDL/SDL_ImageLoaderSDLI.cpp
 	src/Native/SDL/SDL_Time.cpp
 	src/Native/SDL/SDL_Window.cpp
 )

@@ -33,7 +33,7 @@ struct Colour;
 struct Rect;
 
 class Window;
-class Sprite;
+class Image;
 
 namespace NE
 {
@@ -48,10 +48,10 @@ namespace NE
         bool clearScreen(const Colour& colour);
 
         bool drawRect(const Rect& tile, const Colour& colour)const;
-        bool drawSurface(const IVec2& position,const Sprite* pSprite)const;
-        bool drawSurface(const IVec2& position, const Sprite* pSprite, const Colour& mask)const;
-        bool drawSurface(const IVec2& position, const Sprite* pSprite, const Rect& srcRect)const;
-        bool drawSurface(const IVec2& position, const Sprite* pSprite, const Rect& srcRect, const Colour& mask)const;
+        bool drawSurface(const IVec2& position,const Image* pImage)const;
+        bool drawSurface(const IVec2& position, const Image* pImage, const Colour& mask)const;
+        bool drawSurface(const IVec2& position, const Image* pImage, const Rect& srcRect)const;
+        bool drawSurface(const IVec2& position, const Image* pImage, const Rect& srcRect, const Colour& mask)const;
 
         bool updateWindow(void);
     };

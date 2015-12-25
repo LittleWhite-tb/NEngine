@@ -1,3 +1,6 @@
+#ifndef __SDL_ImageFACTORY_H__
+#define __SDL_ImageFACTORY_H__
+
 #ifndef DOXYGEN_IGNORE_TAG
 /**
 NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
@@ -22,36 +25,25 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "SDL_Sprite.h"
+#include "NEngine/ImageFactory.h"
 
-#include <SDL/SDL.h>
+#include "NEngine/Types/Colour.h"
 
-NE :: SDL_Sprite :: SDL_Sprite(SDL_Surface* pSprite)
-	:Sprite(),pSurface(pSprite)
+namespace NE
 {
-	/*
-	if ( pSprite != NULL )
-	{
-		SDL_Surface* pOptimisedSurface = SDL_DisplayFormat(pSprite);
-		if ( pOptimisedSurface != NULL )
-		{
-			pSurface = pOptimisedSurface;
-		}
-		else
-		{
-			LWarning << "Fail to optimise surface for screen";
-			pSurface = pSprite;
-		}
-	}
-	*/
+    class Image;
+
+    class SDL_ImageFactory : public ImageFactory
+    {
+    protected:
+        Image* createImage(const Colour& colour, const USize2& ImageSize);
+    };
 }
 
-NE :: SDL_Sprite :: ~SDL_Sprite(void)
-{
-	SDL_FreeSurface(this->pSurface);
-}
+/*! \class NE::SDL_ImageFactory SDL_ImageFactory.h "NEngine/Native/SDL/SDL_ImageFactory.h"
+ *  \brief ImageFactory implementation for SDL
+ *
+ * The ImageFactory creates Image from a colour and a size
+ */
 
-USize2 NE :: SDL_Sprite :: getSize(void)const
-{
-	return USize2(pSurface->w,pSurface->h);
-}
+#endif

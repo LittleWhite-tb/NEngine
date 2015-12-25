@@ -1,5 +1,5 @@
-#ifndef __NE_ISPRITELOADER_H__
-#define __NE_ISPRITELOADER_H__
+#ifndef __NE_IIMAGELOADER_H__
+#define __NE_IIMAGELOADER_H__
 
 #ifndef DOXYGEN_IGNORE_TAG
 /**
@@ -32,37 +32,37 @@ e-mail: lw.demoscene@gmail.com
 
 namespace NE
 {
-    class Sprite;
+    class Image;
 
-    class ISpriteLoader
+    class IImageLoader
     {
     public:
-        virtual ~ISpriteLoader(void) {}
+        virtual ~IImageLoader(void) {}
 
-        virtual Sprite* loadSpriteFromFile(const std::string& fileName, const Colour& transparancyColour)=0;
+        virtual Image* loadImageFromFile(const std::string& fileName, const Colour& transparancyColour)=0;
     };
 }
 
-/*! \class NE::SpriteLoader SpriteLoader.h "NEngine/SpriteLoader.h"
- *  \brief SpriteLoader interface
+/*! \class NE::ImageLoader ImageLoader.h "NEngine/ImageLoader.h"
+ *  \brief ImageLoader interface
  *
- * The SpriteLoader class gives an interface to implement new platform specific Sprite loading functions.
- * To save loading time, the loader is using a bank to keep the Sprite already loaded. The second advantage of this, is that the memory deallocation has not to be done by the user.
+ * The ImageLoader class gives an interface to implement new platform specific Image loading functions.
+ * To save loading time, the loader is using a bank to keep the Image already loaded. The second advantage of this, is that the memory deallocation has not to be done by the user.
  */
 
-/*! \fn virtual Sprite* NE::SpriteLoader::loadSprite(const std::string& fileName)=0
- * \brief load a Sprite from a file
+/*! \fn virtual Image* NE::ImageLoader::loadImage(const std::string& fileName)=0
+ * \brief load a Image from a file
  * \param fileName the name of the file to load
- * \return a pointer to the newly loaded Sprite
+ * \return a pointer to the newly loaded Image
 */
 
-/*! \fn virtual NE::SpriteLoader::~SpriteLoader(void)
+/*! \fn virtual NE::ImageLoader::~ImageLoader(void)
  */
 
-/*! \fn virtual Sprite* NE::SpriteLoader::loadSpriteFromFile(const std::string& fileName)=0
- * \brief load a Sprite from a file, or return the corresponding Sprite if already loaded
+/*! \fn virtual Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName)=0
+ * \brief load a Image from a file, or return the corresponding Image if already loaded
  * \param fileName the name of the file to load
- * \return a pointer to the newly loaded Sprite
+ * \return a pointer to the newly loaded Image
 */
 
 #endif

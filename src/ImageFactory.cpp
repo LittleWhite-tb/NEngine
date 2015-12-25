@@ -22,39 +22,39 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "NEngine/SpriteFactory.h"
+#include "NEngine/ImageFactory.h"
 
-#include "NEngine/Sprite.h"
+#include "NEngine/Image.h"
 
 #include "NEngine/NEngine.h"
 
-NE::SpriteFactory :: ~SpriteFactory(void)
+NE::ImageFactory :: ~ImageFactory(void)
 {
-    for( std::map<std::pair<USize2, Colour>, NE::Sprite*>::const_iterator itSprite = spritesBank.begin() ; itSprite != spritesBank.end() ; ++itSprite )
+    for( std::map<std::pair<USize2, Colour>, NE::Image*>::const_iterator itImage = imagesBank.begin() ; itImage != imagesBank.end() ; ++itImage )
 	{
-		delete (itSprite->second);
+        delete (itImage->second);
 	}
-	spritesBank.clear();
+    imagesBank.clear();
 }
 
-NE::Sprite* NE::SpriteFactory::createSpriteFromColour(const Colour& colour, const USize2& spriteSize)
+NE::Image* NE::ImageFactory::createImageFromColour(const Colour& colour, const USize2& ImageSize)
 {
-    std::pair<USize2, Colour> requiredPair(spriteSize,colour);
-    if ( spritesBank.find(requiredPair) == spritesBank.end() ) // Not found
+    std::pair<USize2, Colour> requiredPair(ImageSize,colour);
+    if ( imagesBank.find(requiredPair) == imagesBank.end() ) // Not found
     {
-        Sprite* pSprite = createSprite(colour,spriteSize);
-        if ( pSprite == NULL )
+        Image* pImage = createImage(colour,ImageSize);
+        if ( pImage == NULL )
         {
-            NEError << "NE::SpriteFactory (Fail to create the Sprite " << colour << "\n";
+            NEError << "NE::ImageFactory (Fail to create the Image " << colour << "\n";
             return NULL;
         }
 
-        spritesBank[requiredPair] = pSprite;
-        return pSprite;
+        imagesBank[requiredPair] = pImage;
+        return pImage;
     }
     else
     {
-        return spritesBank[requiredPair];
+        return imagesBank[requiredPair];
     }
 }
 

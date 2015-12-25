@@ -25,7 +25,7 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/Renderer.h"
 
 #include "NEngine/Window.h"
-#include "NEngine/Sprite.h"
+#include "NEngine/Image.h"
 
 #include <cassert>
 
@@ -34,7 +34,7 @@ void* NE::Renderer :: getNativeWindow()const
     return pWin->getNativeWindow();
 }
 
-void* NE::Renderer :: getNativeSurface(const Sprite* pSprite)const
+void* NE::Renderer :: getNativeSurface(const Image* pImage)const
 {
-    return pSprite->getNativeSprite();
+    return pImage->getNativeImage();
 }

@@ -1,5 +1,5 @@
-#ifndef __NE_SPRITE_H__
-#define __NE_SPRITE_H__
+#ifndef __NE_IMAGE_H__
+#define __NE_IMAGE_H__
 
 #ifndef DOXYGEN_IGNORE_TAG
 /**
@@ -33,48 +33,49 @@ struct Colour;
 
 namespace NE
 {
-    class Sprite
+    class Image
     {
     protected:
-        // void* pData;     /*!< The pointer on the native Sprite */
-        virtual void* getNativeSprite(void)const=0;
+        virtual void* getNativeImage(void)const=0;
 
-        virtual ~Sprite(void) {}
+        virtual ~Image(void) {}
 
     public:
-        Sprite(void) {}
+        Image(void) {}
 
         virtual USize2 getSize(void)const=0;
 
         friend class Renderer;
 
-        // To have only the sprite loader able to delete a Sprite
-        friend class Bank<const Sprite>;
-        friend class SpriteFactory;
+        // To have only the image loader able to delete a Image
+        friend class Bank<const Image>;
+        friend class ImageFactory;
     };
 }
 
-/*! \class NE::Sprite Sprite.h "NEngine/Sprite.h"
- *  \brief Sprite interface
+/*! \class NE::Image Image.h "NEngine/Image.h"
+ *  \brief Image interface
  *
- * The Sprite class gives an interface to implement new platform specific Sprite functions.
+ * The Image class gives an interface to implement new platform specific Image functions.
+ * An image is an array of pixels than can be load through disk using ImageLoader, or even
+ * created on the fly through ImageFactory.
  */
 
-/*! \fn NE::Sprite::Sprite(void)
+/*! \fn NE::Image::Image(void)
  */
 
-/*! \fn virtual NE::Sprite::~Sprite(void)
+/*! \fn virtual NE::Image::~Image(void)
  */
 
-/*! \fn virtual void* NE::Sprite::getNativeSprite(void)const = 0;
- *  \brief return a pointer to the native sprite handle
- *  \return a pointer to the native sprite handler
+/*! \fn virtual void* NE::Image::getNativeImage(void)const = 0;
+ *  \brief return a pointer to the native image handle
+ *  \return a pointer to the native image handler
  *  The use of a void* is done to avoid specific code
  */
 
-/*! \fn virtual USize2 NE::Sprite::getSize(void)const=0
- * \brief Get the size of the Sprite
- * \return the size of the Sprite
+/*! \fn virtual USize2 NE::Image::getSize(void)const=0
+ * \brief Get the size of the Image
+ * \return the size of the Image
  */
 
 #endif

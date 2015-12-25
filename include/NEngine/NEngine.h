@@ -39,9 +39,9 @@ namespace NE
 	class InputManager;
 	class Time;
 
-	class Sprite;
-	class SpriteLoader;
-	class SpriteFactory;
+	class Image;
+	class ImageLoader;
+	class ImageFactory;
 
 	class SoundLoader;
 	class SoundEngine;
@@ -58,8 +58,8 @@ namespace NE
 		InputManager* pInputManager;	/*!< InputManager used by the Engine */
 		Time* pTime;					/*!< Time used by the Engine */
 
-		SpriteLoader* pSpriteLoader;	/*!< SpriteLoader used by the Engine */
-		SpriteFactory* pSpriteFactory;	/*!< SpriteFactory used by the Engine */
+        ImageLoader* pImageLoader;	/*!< ImageLoader used by the Engine */
+        ImageFactory* pImageFactory;	/*!< ImageFactory used by the Engine */
 
 		SoundLoader* pSoundLoader;
 		SoundEngine* pSoundEngine;
@@ -77,8 +77,8 @@ namespace NE
 		Window* getWindow(void) { return pWin; }
 		// void setWindow(Window* const pWin) { this->pWin = pWin; }
 
-        SpriteLoader* getSpriteLoader(void) { return pSpriteLoader; }
-        SpriteFactory* getSpriteFactory(void) { return pSpriteFactory; }
+        ImageLoader* getImageLoader(void) { return pImageLoader; }
+        ImageFactory* getImageFactory(void) { return pImageFactory; }
 
         SoundEngine* getSoundEngine(void) { return pSoundEngine; }
 

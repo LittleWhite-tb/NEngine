@@ -34,7 +34,7 @@ e-mail: lw.demoscene@gmail.com
 
 #include "NEngine/NEngine.h"
 #include "NEngine/Window.h"
-#include "NEngine/Sprite.h"
+#include "NEngine/Image.h"
 
 bool NE :: SDL_Renderer :: clearScreen(const Colour& colour)
 {
@@ -66,26 +66,26 @@ bool NE :: SDL_Renderer :: drawRect(const Rect& tile, const Colour& colour)const
     return true;
 }
 
-bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSprite)const
+bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Image* pImage)const
 {
-    assert(pSprite);
+    assert(pImage);
 
-    return this->drawSurface(position,pSprite,Rect(IVec2(),pSprite->getSize()));
+    return this->drawSurface(position,pImage,Rect(IVec2(),pImage->getSize()));
 }
 
-bool NE :: SDL_Renderer :: drawSurface(const IVec2& position, const Sprite* pSprite, const Colour& mask)const
+bool NE :: SDL_Renderer :: drawSurface(const IVec2& position, const Image* pImage, const Colour& mask)const
 {
-    assert(pSprite);
+    assert(pImage);
 
-    return this->drawSurface(position,pSprite,Rect(IVec2(),pSprite->getSize()),mask);
+    return this->drawSurface(position,pImage,Rect(IVec2(),pImage->getSize()),mask);
 }
 
-bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSprite, const Rect& srcRect)const
+bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Image* pImage, const Rect& srcRect)const
 {
-    assert(pSprite);
+    assert(pImage);
 
     SDL_Surface* pSDLWindow = static_cast<SDL_Surface*>(this->getNativeWindow());
-    SDL_Surface* pSDLSurface = static_cast<SDL_Surface*>(this->getNativeSurface(pSprite));
+    SDL_Surface* pSDLSurface = static_cast<SDL_Surface*>(this->getNativeSurface(pImage));
     SDL_Rect sdlDestRect = { static_cast<short int>(position.x),
                         static_cast<short int>(position.y),
                         static_cast<unsigned short int>(srcRect.size.width),
@@ -105,12 +105,12 @@ bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSpri
     return true;
 }
 
-bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSprite, const Rect& srcRect, const Colour& mask)const
+bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Image* pImage, const Rect& srcRect, const Colour& mask)const
 {
-    assert(pSprite);
+    assert(pImage);
 
     SDL_Surface* pSDLWindow = static_cast<SDL_Surface*>(this->getNativeWindow());
-    SDL_Surface* pSDLSurface = static_cast<SDL_Surface*>(this->getNativeSurface(pSprite));
+    SDL_Surface* pSDLSurface = static_cast<SDL_Surface*>(this->getNativeSurface(pImage));
     SDL_Rect sdlDestRect = { static_cast<short int>(position.x),
                         static_cast<short int>(position.y),
                         static_cast<unsigned short int>(srcRect.size.width),
@@ -124,7 +124,7 @@ bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSpri
     SDL_Surface* pSrc = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, srcRect.size.width, srcRect.size.height, pSDLSurface->format->BitsPerPixel, mask.r,mask.g,mask.b, mask.a);
     if ( pSrc == NULL )
     {
-        NEWarning << "Fail to produce the copy of the sprite for RSDL :: drawTile\n";
+        NEWarning << "Fail to produce the copy of the Image for RSDL :: drawTile\n";
         return false;
 
     }
@@ -132,7 +132,7 @@ bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSpri
     // The masking is done in CreateRGBSurface
     if ( SDL_BlitSurface(pSDLSurface, &sdlSrcRect, pSrc, NULL)  != 0 )
     {
-        NEWarning << "Fail to copy the sprite in a temporary surface\n";
+        NEWarning << "Fail to copy the Image in a temporary surface\n";
         SDL_FreeSurface(pSrc);
         return false;
     }
@@ -140,7 +140,7 @@ bool NE :: SDL_Renderer :: drawSurface(const IVec2& position,const Sprite* pSpri
     // Making a pre blit with the original image
     if ( SDL_BlitSurface(pSDLSurface, &sdlSrcRect, pSDLWindow, &sdlDestRect)  != 0 )
     {
-        NEWarning << "Fail to copy the sprite in a temporary surface\n";
+        NEWarning << "Fail to copy the Image in a temporary surface\n";
         SDL_FreeSurface(pSrc);
         return false;
     }

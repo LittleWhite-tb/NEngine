@@ -29,7 +29,7 @@ e-mail: lw.demoscene@gmail.com
 
 namespace NE
 {
-    class Sprite;
+    class Image;
 
     class SDL_Engine : public NE::NEngine
     {

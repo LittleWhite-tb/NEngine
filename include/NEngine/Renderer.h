@@ -32,7 +32,7 @@ struct Rect;
 
 namespace NE
 {
-    class Sprite;
+    class Image;
     class Window;
 
     class Renderer
@@ -42,7 +42,7 @@ namespace NE
         Window* pWin;       /*!< Window where the Renderer will draw */
 
         void* getNativeWindow(void)const;
-        void* getNativeSurface(const Sprite* pSprite)const;
+        void* getNativeSurface(const Image* pImage)const;
 
     public:
         Renderer(Window* pWin):pWin(pWin) {}
@@ -52,10 +52,10 @@ namespace NE
 
         virtual bool drawRect(const Rect& tile, const Colour& colour)const=0;
 
-        virtual bool drawSurface(const IVec2& position,const Sprite* pSurface)const=0;
-        virtual bool drawSurface(const IVec2& position,const Sprite* pSurface, const Colour& mask)const=0;
-        virtual bool drawSurface(const IVec2& position,const Sprite* pSurface, const Rect& srcRect)const=0;
-        virtual bool drawSurface(const IVec2& position,const Sprite* pSurface, const Rect& srcRect, const Colour& mask)const=0;
+        virtual bool drawSurface(const IVec2& position,const Image* pSurface)const=0;
+        virtual bool drawSurface(const IVec2& position,const Image* pSurface, const Colour& mask)const=0;
+        virtual bool drawSurface(const IVec2& position,const Image* pSurface, const Rect& srcRect)const=0;
+        virtual bool drawSurface(const IVec2& position,const Image* pSurface, const Rect& srcRect, const Colour& mask)const=0;
 
         virtual bool updateWindow(void)=0;
     };
@@ -72,10 +72,10 @@ namespace NE
  * \return the pointer of the native window where to render
  */
 
-/*! \fn void* NE::Renderer::getNativeSurface(const Sprite& sprite)const
- * \brief Give access to the native sprite to the childrens of the class
- * \param sprite the sprite to use
- * \return the pointer on the native sprite
+/*! \fn void* NE::Renderer::getNativeSurface(const Image& image)const
+ * \brief Give access to the native image to the childrens of the class
+ * \param image the image to use
+ * \return the pointer on the native image
  */
 
 /*! \fn NE::Renderer::Renderer(Window* pWin)

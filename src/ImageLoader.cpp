@@ -22,39 +22,39 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "NEngine/SpriteLoader.h"
+#include "NEngine/ImageLoader.h"
 
 #include "NEngine/NEngine.h"
-#include "NEngine/ISpriteLoader.h"
+#include "NEngine/IImageLoader.h"
 #include "NEngine/Exceptions/FileNotFoundException.h"
 
 #include <cassert>
 
-const NE::Sprite* NE::SpriteLoader::loadSpriteFromFile(const std::string& fileName)
+const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName)
 {
-    const NE::Sprite* pSprite = m_bank.get(fileName);
+    const NE::Image* pImage = m_bank.get(fileName);
 
-    if ( pSprite == NULL ) // It was not in the bank
+    if ( pImage == NULL ) // It was not in the bank
     {
-        for ( std::list<NE::ISpriteLoader*>::const_iterator itLoader = m_loaders.begin() ;
+        for ( std::list<NE::IImageLoader*>::const_iterator itLoader = m_loaders.begin() ;
             itLoader != m_loaders.end() ;
             ++itLoader )
         {
-            pSprite = (*itLoader)->loadSpriteFromFile(fileName,m_transparencyColour);
-            if ( pSprite != NULL )  // It is loaded, we can stop
+            pImage = (*itLoader)->loadImageFromFile(fileName,m_transparencyColour);
+            if ( pImage != NULL )  // It is loaded, we can stop
             {
-                m_bank.add(fileName,pSprite);
+                m_bank.add(fileName,pImage);
                 break;
             }
         }
 
-        // We gone through all loaders, and the sprite is not loaded ... so, error
-        if ( pSprite == NULL )
+        // We gone through all loaders, and the Image is not loaded ... so, error
+        if ( pImage == NULL )
         {
-            NEError << "Fail to load sprite '" << fileName << "'\n";
+            NEError << "Fail to load Image '" << fileName << "'\n";
             throw FileNotFoundException(fileName);
         }
     }
 
-    return pSprite;
+    return pImage;
 }

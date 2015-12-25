@@ -1,6 +1,3 @@
-#ifndef __SDL_SPRITELOADERSDLI_H__
-#define __SDL_SPRITELOADERSDLI_H__
-
 #ifndef DOXYGEN_IGNORE_TAG
 /**
 NEngine: Native Engine abstracts multimedia libraries such as SDL, SFML, Allegro
@@ -25,34 +22,21 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "NEngine/ISpriteLoader.h"
+#include "SDL_Image.h"
 
-#include <string>
+#include <SDL/SDL.h>
 
-namespace NE
+NE::SDL_Image::SDL_Image(SDL_Surface* pImage)
+    :Image(),pSurface(pImage)
 {
-	class Sprite;
-
-    class SDL_SpriteLoaderSDLI : public ISpriteLoader
-    {
-        static const int JPG = 0x00000001;
-        static const int PNG = 0x00000002;
-        static const int TIF = 0x00000004;
-
-    private:
-
-        SDL_SpriteLoaderSDLI(const int flags);
-        ~SDL_SpriteLoaderSDLI(void);
-
-    protected:
-        Sprite* loadSpriteFromFile(const std::string& fileName, const Colour& transparencyColour);
-
-        friend class SDL_Engine;
-    };
 }
 
-/*! \class NE::SDL_SpriteLoaderSDLI SDL_SpriteLoaderSDLI.h "NEngine/Native/SDL/SDL_SpriteLoaderSDLI.h"
- *	\brief SDL_Image implementation for SpriteLoader
- */
+NE::SDL_Image::~SDL_Image(void)
+{
+	SDL_FreeSurface(this->pSurface);
+}
 
-#endif
+USize2 NE::SDL_Image::getSize(void)const
+{
+	return USize2(pSurface->w,pSurface->h);
+}

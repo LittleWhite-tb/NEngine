@@ -31,17 +31,17 @@ e-mail: lw.demoscene@gmail.com
 #include "SDL_Keyboard.h"
 #include "SDL_Joy.h"
 #include "SDL_Time.h"
-#include "SDL_Sprite.h"
-#include "SDL_SpriteLoader.h"
-#include "SDL_SpriteLoaderSDLI.h"
-#include "SDL_SpriteFactory.h"
+#include "SDL_Image.h"
+#include "SDL_ImageLoader.h"
+#include "SDL_ImageLoaderSDLI.h"
+#include "SDL_ImageFactory.h"
 #include "SDL_SoundLoader.h"
 #include "SDL_SoundEngine.h"
 
 #include "NEngine/Exceptions/InputNotFoundException.h"
 #include "NEngine/Exceptions/ConstructionFailedException.h"
 #include "NEngine/NEngine.h"
-#include "NEngine/SpriteLoader.h"
+#include "NEngine/ImageLoader.h"
 #include "NEngine/SoundLoader.h"
 
 bool NE :: SDL_Engine :: initAPI(void)
@@ -60,21 +60,21 @@ bool NE :: SDL_Engine :: initAPI(void)
 
     try
     {
-        pSpriteLoader->registerLoader(new NE::SDL_SpriteLoader());
-        pSpriteLoader->registerLoader(new NE::SDL_SpriteLoaderSDLI(SDL_SpriteLoaderSDLI::PNG));
+        pImageLoader->registerLoader(new NE::SDL_ImageLoader());
+        pImageLoader->registerLoader(new NE::SDL_ImageLoaderSDLI(SDL_ImageLoaderSDLI::PNG));
 
         pSoundLoader->registerLoader(new NE::SDL_SoundLoader());
     }
     catch ( ConstructionFailedException cfe )
     {
         NEError << cfe.what() << "\n";
-        pSpriteLoader = NULL;
+        pImageLoader = NULL;
         pSoundEngine = NULL;
     }
 
-    pSpriteFactory = new NE::SDL_SpriteFactory();
+    pImageFactory = new NE::SDL_ImageFactory();
 
-    if ( pWin == NULL || pRenderer == NULL || pTime == NULL || pSpriteLoader == NULL || pSpriteFactory == NULL )
+    if ( pWin == NULL || pRenderer == NULL || pTime == NULL || pImageLoader == NULL || pImageFactory == NULL )
     {
         NEError << "Fail to allocate memory for SDL_Engine components\n";
         return false;
@@ -111,8 +111,8 @@ bool NE :: SDL_Engine :: stopAPI(void)
 {
 	delete pSoundEngine; pSoundEngine = NULL;
     delete pSoundLoader; pSoundLoader = NULL;
-    delete pSpriteFactory; pSpriteFactory = NULL;
-    delete pSpriteLoader; pSpriteLoader = NULL;
+    delete pImageFactory; pImageFactory = NULL;
+    delete pImageLoader; pImageLoader = NULL;
     delete pTime; pTime = NULL;
     delete pRenderer; pRenderer = NULL;
     delete pWin; pWin = NULL;

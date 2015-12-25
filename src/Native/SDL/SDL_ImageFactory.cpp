@@ -22,17 +22,17 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "SDL_SpriteFactory.h"
+#include "SDL_ImageFactory.h"
 
 #include <SDL/SDL.h>
 
 #include "NEngine/NEngine.h"
-#include "SDL_Sprite.h"
+#include "SDL_Image.h"
 
-NE::Sprite* NE::SDL_SpriteFactory :: createSprite(const Colour& colour, const USize2& spriteSize)
+NE::Image* NE::SDL_ImageFactory :: createImage(const Colour& colour, const USize2& ImageSize)
 {
     SDL_Surface* pSurface = NULL;
-	pSurface = SDL_CreateRGBSurface(SDL_HWSURFACE,spriteSize.width,spriteSize.height,32,
+    pSurface = SDL_CreateRGBSurface(SDL_HWSURFACE,ImageSize.width,ImageSize.height,32,
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 												0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000
 #else
@@ -63,5 +63,5 @@ NE::Sprite* NE::SDL_SpriteFactory :: createSprite(const Colour& colour, const US
 		pPixel++;
 	}
 
-    return new SDL_Sprite(pSurface);
+    return new SDL_Image(pSurface);
 }

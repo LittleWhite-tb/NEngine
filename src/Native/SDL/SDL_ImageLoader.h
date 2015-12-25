@@ -1,5 +1,5 @@
-#ifndef __SDL_SPRITEFACTORY_H__
-#define __SDL_SPRITEFACTORY_H__
+#ifndef __NE_SDL_ImageLOADER_H__
+#define __NE_SDL_ImageLOADER_H__
 
 #ifndef DOXYGEN_IGNORE_TAG
 /**
@@ -25,25 +25,23 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "NEngine/SpriteFactory.h"
+#include "NEngine/IImageLoader.h"
 
-#include "NEngine/Types/Colour.h"
+#include <string>
 
 namespace NE
 {
-    class Sprite;
+    class Image;
 
-    class SDL_SpriteFactory : public SpriteFactory
+    class SDL_ImageLoader : public IImageLoader
     {
-    protected:
-        Sprite* createSprite(const Colour& colour, const USize2& spriteSize);
+    public:
+        Image* loadImageFromFile(const std::string& fileName, const Colour& transparencyColour);
     };
 }
 
-/*! \class NE::SDL_SpriteFactory SDL_SpriteFactory.h "NEngine/Native/SDL/SDL_SpriteFactory.h"
- *  \brief SpriteFactory implementation for SDL
- *
- * The SpriteFactory creates sprite from a colour and a size
+/*! \class NE::SDL_ImageLoader SDL_ImageLoader.h "NEngine/Native/SDL/SDL_ImageLoader.h"
+ *  \brief SDL implementation for ImageLoader
  */
 
 #endif

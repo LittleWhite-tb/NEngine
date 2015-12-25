@@ -28,13 +28,13 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/Logging/Formater/ColourFormater.hpp"
 #include "NEngine/Logging/Writer/ConsoleWriter.hpp"
 
-#include "NEngine/SpriteLoader.h"
+#include "NEngine/ImageLoader.h"
 #include "NEngine/SoundLoader.h"
 #include "NEngine/InputManager.h"
 
 NE::Logger<NE::LoggerFilter,NE::LoggerFormater,NE::LoggerWriter>* NE::NEngine::m_pLogger = NULL;
 
-bool NE :: NEngine :: init(void)
+bool NE::NEngine::init(void)
 {
 	bool bError = true;
 
@@ -45,10 +45,10 @@ bool NE :: NEngine :: init(void)
 		m_pLogger = reinterpret_cast<NE::Logger<NE::LoggerFilter,NE::LoggerFormater,NE::LoggerWriter>*>(new NE::Logger<NE::NoFilter,NE::ColourFormater,NE::ConsoleWriter>());
 	}
 
-    pSpriteLoader = new SpriteLoader();
-    if ( pSpriteLoader == NULL )
+    pImageLoader = new ImageLoader();
+    if ( pImageLoader == NULL )
     {
-        NEError << "Fail to allocate the SpriteLoader\n";
+        NEError << "Fail to allocate the ImageLoader\n";
         bError = false;
     }
 

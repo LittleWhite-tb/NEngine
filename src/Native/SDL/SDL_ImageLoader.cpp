@@ -22,16 +22,16 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "SDL_SpriteLoader.h"
+#include "SDL_ImageLoader.h"
 
 #include <SDL/SDL.h>
 
 #include <string>
 
 #include "NEngine/NEngine.h"
-#include "SDL_Sprite.h"
+#include "SDL_Image.h"
 
-NE::Sprite* NE::SDL_SpriteLoader :: loadSpriteFromFile(const std::string& fileName, const Colour& transparencyColour)
+NE::Image* NE::SDL_ImageLoader :: loadImageFromFile(const std::string& fileName, const Colour& transparencyColour)
 {
     SDL_Surface* pSurface = SDL_LoadBMP(fileName.c_str());
     if ( pSurface != NULL )
@@ -55,18 +55,18 @@ NE::Sprite* NE::SDL_SpriteLoader :: loadSpriteFromFile(const std::string& fileNa
         }
         else
         {
-            NEError << "Fail to optimise sprite '" << fileName << "'\n";
+            NEError << "Fail to optimise Image '" << fileName << "'\n";
         }
 
-        NE::SDL_Sprite* pSprite = new NE::SDL_Sprite(pSurface);
-        if ( pSprite == NULL )
+        NE::SDL_Image* pImage = new NE::SDL_Image(pSurface);
+        if ( pImage == NULL )
         {
-            NEError << "Fail to allocate memory for a SDL_Sprite\n";
+            NEError << "Fail to allocate memory for a SDL_Image\n";
         }
 
-        return pSprite;
+        return pImage;
     }
 
-    // NEError << "Fail to load a sprite from file: " << SDL_GetError() << "\n";
+    // NEError << "Fail to load a Image from file: " << SDL_GetError() << "\n";
     return NULL;
 }

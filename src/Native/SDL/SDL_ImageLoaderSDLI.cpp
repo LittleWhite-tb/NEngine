@@ -22,19 +22,19 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "SDL_SpriteLoaderSDLI.h"
+#include "SDL_ImageLoaderSDLI.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
 #include <string>
 
-#include "SDL_Sprite.h"
+#include "SDL_Image.h"
 
 #include "NEngine/Exceptions/ConstructionFailedException.h"
 #include "NEngine/NEngine.h"
 
-NE :: SDL_SpriteLoaderSDLI :: SDL_SpriteLoaderSDLI(const int flags)
+NE :: SDL_ImageLoaderSDLI :: SDL_ImageLoaderSDLI(const int flags)
 {
     int initIMG = IMG_Init(flags);
 
@@ -42,16 +42,16 @@ NE :: SDL_SpriteLoaderSDLI :: SDL_SpriteLoaderSDLI(const int flags)
     if ( (initIMG & flags) != flags )
     {
         NEError << "Fail to init the SDL_image with PNG support (" << IMG_GetError() << ")\n";
-        throw ConstructionFailedException("SDL_SpriteLoaderSDLI");
+        throw ConstructionFailedException("SDL_ImageLoaderSDLI");
     }
 }
 
-NE :: SDL_SpriteLoaderSDLI :: ~SDL_SpriteLoaderSDLI(void)
+NE :: SDL_ImageLoaderSDLI :: ~SDL_ImageLoaderSDLI(void)
 {
     IMG_Quit();
 }
 
-NE :: Sprite* NE :: SDL_SpriteLoaderSDLI :: loadSpriteFromFile(const std::string& fileName, const Colour& transparencyColour)
+NE :: Image* NE :: SDL_ImageLoaderSDLI :: loadImageFromFile(const std::string& fileName, const Colour& transparencyColour)
 {
     (void)transparencyColour;
 
@@ -61,15 +61,15 @@ NE :: Sprite* NE :: SDL_SpriteLoaderSDLI :: loadSpriteFromFile(const std::string
 
     if ( pSurface != NULL )
     {
-        NE::SDL_Sprite* pSprite = new NE::SDL_Sprite(pSurface);
-        if ( pSprite == NULL )
+        NE::SDL_Image* pImage = new NE::SDL_Image(pSurface);
+        if ( pImage == NULL )
         {
-            NEError << "Fail to allocate memory for a SDL_Sprite\n";
+            NEError << "Fail to allocate memory for a SDL_Image\n";
         }
 
-        return pSprite;
+        return pImage;
     }
 
-    // LError << "Fail to load a sprite from file: " << IMG_GetError();
+    // LError << "Fail to load a Image from file: " << IMG_GetError();
     return NULL;
 }
