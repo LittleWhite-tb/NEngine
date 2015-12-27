@@ -10,7 +10,6 @@ else()
         add_definitions("-Wall -Wextra")
 endif ()
 
-include_directories(include/)
 include_directories(src/)
 
 set(NEngine_sources
@@ -27,7 +26,6 @@ set(NEngine_sources
 	src/SoundEngine.cpp
 	src/SoundLoader.cpp
         src/Sprite.cpp
-
 	
 	src/Types/Colour.cpp
 	
@@ -79,3 +77,6 @@ if (NOT SDLIMAGE_FOUND)
 endif()
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 target_link_libraries (NEngine ${SDLIMAGE_LIBRARY})
+
+target_include_directories(NEngine PUBLIC include/)
+
