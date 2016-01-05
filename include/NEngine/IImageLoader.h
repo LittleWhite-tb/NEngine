@@ -43,24 +43,17 @@ namespace NE
     };
 }
 
-/*! \class NE::ImageLoader ImageLoader.h "NEngine/ImageLoader.h"
+/*! \class NE::IImageLoader IImageLoader.h "NEngine/IImageLoader.h"
  *  \brief ImageLoader interface
  *
- * The ImageLoader class gives an interface to implement new platform specific Image loading functions.
- * To save loading time, the loader is using a bank to keep the Image already loaded. The second advantage of this, is that the memory deallocation has not to be done by the user.
+ * The IImageLoader class gives an interface to implement new platform specific Image loading functions.
  */
 
-/*! \fn virtual Image* NE::ImageLoader::loadImage(const std::string& fileName)=0
- * \brief load a Image from a file
- * \param fileName the name of the file to load
- * \return a pointer to the newly loaded Image
-*/
-
-/*! \fn virtual NE::ImageLoader::~ImageLoader(void)
+/*! \fn virtual NE::IImageLoader::~IImageLoader(void)
  */
 
-/*! \fn virtual Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName)=0
- * \brief load a Image from a file, or return the corresponding Image if already loaded
+/*! \fn virtual Image* NE::IImageLoader::loadImageFromFile(const std::string& fileName)=0
+ * \brief load an \a Image from a file
  * \param fileName the name of the file to load
  * \return a pointer to the newly loaded Image
 */

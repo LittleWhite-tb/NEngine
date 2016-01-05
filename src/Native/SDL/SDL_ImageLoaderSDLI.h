@@ -55,4 +55,18 @@ namespace NE
  *	\brief SDL_Image implementation for ImageLoader
  */
 
+/*! \fn NE::SDL_ImageLoaderSDLI::SDL_ImageLoaderSDLI(const int flags)
+ * \brief Start SDL_Image with several image format asked through \a flags
+ * \param flags the image format you want to support
+*/
+
+/*! \fn virtual NE::SDL_ImageLoaderSDLI::~SDL_ImageLoaderSDLI(void)
+ */
+
+/*! \fn Image* NE::SDL_ImageLoaderSDLI::loadImageFromFile(const std::string& fileName)
+ * \brief load a \a Image from a file
+ * \param fileName the name of the file to load
+ * \return a pointer to the newly loaded Image
+*/
+
 #endif

@@ -47,4 +47,19 @@ namespace NE
     };
 }
 
+/*! \class NE::ImageLoader ImageLoader.h "NEngine/ImageLoader.h"
+ *  \brief ImageLoader interface
+ *
+ * The ImageLoader class gives an interface to implement new platform specific Image loading functions.
+ * To save loading time, the loader is using a bank to keep the Image already loaded. The second advantage of this, is that the memory deallocation has not to be done by the user.
+ */
+
+/*! \fn const Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName, const Colour& transparencyColour, ImageBank& bank)=0
+ * \brief load a Image from a file, or return the corresponding Image if already loaded
+ * \param fileName the name of the file to load
+ * \param transparencyColour the transparency colour to apply on the loaded image
+ * \param bank the bank where to put the \a Image
+ * \return a pointer to the newly loaded \a Image
+*/
+
 #endif

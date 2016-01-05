@@ -29,10 +29,10 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/NEngine.h"
 #include "SDL_Image.h"
 
-NE::Image* NE::SDL_ImageFactory :: createImage(const Colour& colour, const USize2& ImageSize)
+NE::Image* NE::SDL_ImageFactory :: createImage(const Colour& colour, const USize2& size)
 {
     SDL_Surface* pSurface = NULL;
-    pSurface = SDL_CreateRGBSurface(SDL_HWSURFACE,ImageSize.width,ImageSize.height,32,
+    pSurface = SDL_CreateRGBSurface(SDL_HWSURFACE,size.width,size.height,32,
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 												0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000
 #else

@@ -58,8 +58,9 @@ namespace NE
  *  \brief SDL implementation for Image
  */
 
-/*! \fn NE::SDL_Image::SDL_Image(SDL_Surface* pSprite)
+/*! \fn NE::SDL_Image::SDL_Image(SDL_Surface* pImage)
  * \param pImage Native surface to use as Image
  */
+
 
 #endif

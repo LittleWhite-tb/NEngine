@@ -36,7 +36,7 @@ namespace NE
     class SDL_ImageFactory : public ImageFactory
     {
     protected:
-        Image* createImage(const Colour& colour, const USize2& ImageSize);
+        Image* createImage(const Colour& colour, const USize2& size);
     };
 }
 
@@ -45,5 +45,12 @@ namespace NE
  *
  * The ImageFactory creates Image from a colour and a size
  */
+
+/*! \fn Image* NE::SDL_ImageFactory::createImage(const Colour& colour, const USize2& ImageSize)
+ * \brief Create a \a Image from scratch
+ * \param colour the colour of the new \a Image
+ * \return size the size of the new \a Image
+*/
+
 
 #endif

@@ -44,4 +44,10 @@ namespace NE
  *  \brief SDL implementation for ImageLoader
  */
 
+/*! \fn Image* NE::SDL_ImageLoader::loadImageFromFile(const std::string& fileName)
+ * \brief load a \a Image from a file
+ * \param fileName the name of the file to load
+ * \return a pointer to the newly loaded Image
+*/
+
 #endif

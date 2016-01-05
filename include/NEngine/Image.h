@@ -42,7 +42,7 @@ namespace NE
 
         virtual ~Image(void) {}
 
-        virtual void updateTransparencyColour()const;
+        virtual void updateTransparencyColour()const=0;
 
     public:
         Image(void) {}
@@ -75,14 +75,29 @@ namespace NE
  */
 
 /*! \fn virtual void* NE::Image::getNativeImage(void)const = 0;
- *  \brief return a pointer to the native image handle
+ *  \brief Return a pointer to the native image handle
  *  \return a pointer to the native image handler
  *  The use of a void* is done to avoid specific code
+ */
+
+/*! \fn virtual void NE::Image::updateTransparencyColour(void)const = 0;
+ *  \brief Change the transparency colour of the native image
+ *  The colour is read from the member variable set by \a setTransparencyColour().
  */
 
 /*! \fn virtual USize2 NE::Image::getSize(void)const=0
  * \brief Get the size of the Image
  * \return the size of the Image
+ */
+
+/*! \fn void NE::Image::setTransparencyColour(const Colour& colour)
+ * \brief Change the transparency colour
+ * \param colour the new transparency colour
+ */
+
+/*! \fn const Colour& NE::Image::getTransparencyColour(void)const
+ * \brief Get the transparency colour
+ * \return the transparency colour
  */
 
 #endif
