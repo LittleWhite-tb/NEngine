@@ -30,9 +30,9 @@ e-mail: lw.demoscene@gmail.com
 
 #include <cassert>
 
-const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName)
+const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName, const Colour& transparencyColour, NE::ImageBank& bank)
 {
-    const NE::Image* pImage = m_bank.get(fileName);
+    const NE::Image* pImage = bank.get(fileName);
 
     if ( pImage == NULL ) // It was not in the bank
     {
@@ -40,10 +40,10 @@ const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName)
             itLoader != m_loaders.end() ;
             ++itLoader )
         {
-            pImage = (*itLoader)->loadImageFromFile(fileName,m_transparencyColour);
+            pImage = (*itLoader)->loadImageFromFile(fileName,transparencyColour);
             if ( pImage != NULL )  // It is loaded, we can stop
             {
-                m_bank.add(fileName,pImage);
+                bank.add(fileName,pImage);
                 break;
             }
         }

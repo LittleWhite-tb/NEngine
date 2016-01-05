@@ -30,30 +30,20 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/Types/Colour.h"
 #include "NEngine/Loader.h"
 #include "NEngine/IImageLoader.h"
-#include "NEngine/Image.h"
 
 #include "Bank.h"
 
 namespace NE
 {
     class IImageLoader;
+    class Image;
+
+    typedef Bank<const Image> ImageBank;
 
     class ImageLoader : public Loader<NE::IImageLoader>
     {
-    private:
-        Colour m_transparencyColour;
-
-        Bank<const Image> m_bank;
-
     public:
-
-        ImageLoader() {}
-
-        const Image* loadImageFromFile(const std::string& fileName);
-
-        // @TODO : move this to new image
-        void setTransparencyColour(const Colour& transparencyColour) { m_transparencyColour = transparencyColour; }
-        const Colour& getTransparencyColour() { return m_transparencyColour; }
+        const Image* loadImageFromFile(const std::string& fileName, const Colour& transparencyColour, ImageBank& bank);
     };
 }
 
