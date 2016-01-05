@@ -45,7 +45,7 @@ namespace NE
         ~SDL_ImageLoaderSDLI(void);
 
     protected:
-        Image* loadImageFromFile(const std::string& fileName, const Colour& transparencyColour);
+        Image* loadImageFromFile(const std::string& fileName);
 
         friend class SDL_Engine;
     };

@@ -22,31 +22,11 @@ e-mail: lw.demoscene@gmail.com
 **/
 #endif
 
-#include "SDL_Image.h"
+#include "NEngine/Image.h"
 
-#include <SDL/SDL.h>
 
-NE::SDL_Image::SDL_Image(SDL_Surface* pImage)
-    :Image(),pSurface(pImage)
+void NE::Image::setTransparencyColour(const Colour& colour)
 {
-}
-
-NE::SDL_Image::~SDL_Image(void)
-{
-	SDL_FreeSurface(this->pSurface);
-}
-
-USize2 NE::SDL_Image::getSize(void)const
-{
-    return USize2(pSurface->w,pSurface->h);
-}
-
-void NE::SDL_Image::updateTransparencyColour()const
-{
-    // We set the color
-    Uint32 colorkey = SDL_MapRGB(pSurface->format, m_transparencyColour.r, m_transparencyColour.g, m_transparencyColour.b);
-    if ( SDL_SetColorKey(pSurface, SDL_SRCCOLORKEY, colorkey ) == -1 )
-    {
-        NEWarning << "Fail to set transparency colour !'\n";
-    }
+    m_transparencyColour = colour;
+    this->updateTransparencyColour();
 }

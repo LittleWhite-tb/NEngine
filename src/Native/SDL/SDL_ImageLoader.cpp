@@ -31,7 +31,7 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/NEngine.h"
 #include "SDL_Image.h"
 
-NE::Image* NE::SDL_ImageLoader :: loadImageFromFile(const std::string& fileName, const Colour& transparencyColour)
+NE::Image* NE::SDL_ImageLoader :: loadImageFromFile(const std::string& fileName)
 {
     SDL_Surface* pSurface = SDL_LoadBMP(fileName.c_str());
     if ( pSurface != NULL )
@@ -42,13 +42,6 @@ NE::Image* NE::SDL_ImageLoader :: loadImageFromFile(const std::string& fileName,
         {
             // We clean old surface
             SDL_FreeSurface(pSurface);
-
-            // We set the color
-            Uint32 colorkey = SDL_MapRGB(pOptimisedSurface->format, transparencyColour.r, transparencyColour.g, transparencyColour.b);
-            if ( SDL_SetColorKey(pOptimisedSurface, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey ) == -1 )
-            {
-                NEWarning << "Fail to set transparency to '" << fileName << "'\n";
-            }
 
             // We replace the pointer to the new optimised surface
             pSurface = pOptimisedSurface;

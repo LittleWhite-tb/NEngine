@@ -26,24 +26,31 @@ e-mail: lw.demoscene@gmail.com
 #endif
 
 #include "NEngine/Types/Size2.h"
+#include "NEngine/Types/Colour.h"
 
 #include "NEngine/Bank.h"
-
-struct Colour;
 
 namespace NE
 {
     class Image
     {
     protected:
+        Colour m_transparencyColour;
+
+
         virtual void* getNativeImage(void)const=0;
 
         virtual ~Image(void) {}
+
+        virtual void updateTransparencyColour()const;
 
     public:
         Image(void) {}
 
         virtual USize2 getSize(void)const=0;
+
+        void setTransparencyColour(const Colour& colour);
+        const Colour& getTransparencyColour()const { return m_transparencyColour; }
 
         friend class Renderer;
 

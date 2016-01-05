@@ -39,7 +39,7 @@ namespace NE
     public:
         virtual ~IImageLoader(void) {}
 
-        virtual Image* loadImageFromFile(const std::string& fileName, const Colour& transparancyColour)=0;
+        virtual Image* loadImageFromFile(const std::string& fileName)=0;
     };
 }
 

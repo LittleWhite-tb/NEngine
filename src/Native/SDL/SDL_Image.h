@@ -28,6 +28,7 @@ e-mail: lw.demoscene@gmail.com
 #include "NEngine/Image.h"
 
 #include "NEngine/Types/Vec2.h"
+#include "NEngine/Types/Colour.h"
 
 struct SDL_Surface;
 
@@ -46,6 +47,8 @@ namespace NE
 
     public:
         SDL_Image(SDL_Surface* pImage);
+
+        void updateTransparencyColour()const;
 
         USize2 getSize(void)const;
     };

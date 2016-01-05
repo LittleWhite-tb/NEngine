@@ -36,7 +36,7 @@ namespace NE
     class SDL_ImageLoader : public IImageLoader
     {
     public:
-        Image* loadImageFromFile(const std::string& fileName, const Colour& transparencyColour);
+        Image* loadImageFromFile(const std::string& fileName);
     };
 }
 

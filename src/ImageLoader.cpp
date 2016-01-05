@@ -26,6 +26,7 @@ e-mail: lw.demoscene@gmail.com
 
 #include "NEngine/NEngine.h"
 #include "NEngine/IImageLoader.h"
+#include "NEngine/Image.h"
 #include "NEngine/Exceptions/FileNotFoundException.h"
 
 #include <cassert>
@@ -36,24 +37,28 @@ const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName,
 
     if ( pImage == NULL ) // It was not in the bank
     {
+        NE::Image* pNewImage = NULL;
         for ( std::list<NE::IImageLoader*>::const_iterator itLoader = m_loaders.begin() ;
             itLoader != m_loaders.end() ;
             ++itLoader )
         {
-            pImage = (*itLoader)->loadImageFromFile(fileName,transparencyColour);
-            if ( pImage != NULL )  // It is loaded, we can stop
+            pNewImage = (*itLoader)->loadImageFromFile(fileName);
+            if ( pNewImage != NULL )  // It is loaded, we can stop
             {
-                bank.add(fileName,pImage);
+                bank.add(fileName,pNewImage);
                 break;
             }
         }
 
         // We gone through all loaders, and the Image is not loaded ... so, error
-        if ( pImage == NULL )
+        if ( pNewImage == NULL )
         {
             NEError << "Fail to load Image '" << fileName << "'\n";
             throw FileNotFoundException(fileName);
         }
+
+        pNewImage->setTransparencyColour(transparencyColour);
+        pImage = pNewImage;
     }
 
     return pImage;

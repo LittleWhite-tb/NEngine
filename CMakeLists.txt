@@ -15,6 +15,7 @@ include_directories(src/)
 set(NEngine_sources
 
 	src/Bank.cpp
+        src/Image.cpp
         src/IImageLoader.cpp
         src/ImageFactory.cpp
         src/ImageLoader.cpp

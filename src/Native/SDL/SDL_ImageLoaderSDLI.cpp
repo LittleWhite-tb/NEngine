@@ -51,10 +51,8 @@ NE :: SDL_ImageLoaderSDLI :: ~SDL_ImageLoaderSDLI(void)
     IMG_Quit();
 }
 
-NE :: Image* NE :: SDL_ImageLoaderSDLI :: loadImageFromFile(const std::string& fileName, const Colour& transparencyColour)
+NE :: Image* NE :: SDL_ImageLoaderSDLI :: loadImageFromFile(const std::string& fileName)
 {
-    (void)transparencyColour;
-
     SDL_Surface* pSurface = IMG_Load(fileName.c_str());
 
     // No optimisation is possible for these kind of surface
