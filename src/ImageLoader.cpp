@@ -31,35 +31,43 @@ e-mail: lw.demoscene@gmail.com
 
 #include <cassert>
 
-const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName, const Colour& transparencyColour, NE::ImageBank& bank)
+
+NE::Image* NE::ImageLoader::loadImage(const std::string& fileName)
 {
-    const NE::Image* pImage = bank.get(fileName);
-
-    if ( pImage == NULL ) // It was not in the bank
+    NE::Image* pImage = NULL;
+    for ( std::list<NE::IImageLoader*>::const_iterator itLoader = m_loaders.begin() ;
+        itLoader != m_loaders.end() ;
+        ++itLoader )
     {
-        NE::Image* pNewImage = NULL;
-        for ( std::list<NE::IImageLoader*>::const_iterator itLoader = m_loaders.begin() ;
-            itLoader != m_loaders.end() ;
-            ++itLoader )
+        pImage = (*itLoader)->loadImageFromFile(fileName);
+        if ( pImage != NULL )  // It is loaded, we can stop
         {
-            pNewImage = (*itLoader)->loadImageFromFile(fileName);
-            if ( pNewImage != NULL )  // It is loaded, we can stop
+            if ( m_hasTransparencyColour )
             {
-                bank.add(fileName,pNewImage);
-                break;
+                pImage->setTransparencyColour(m_transparencyColour);
             }
+            break;
         }
-
-        // We gone through all loaders, and the Image is not loaded ... so, error
-        if ( pNewImage == NULL )
-        {
-            NEError << "Fail to load Image '" << fileName << "'\n";
-            throw FileNotFoundException(fileName);
-        }
-
-        pNewImage->setTransparencyColour(transparencyColour);
-        pImage = pNewImage;
     }
 
+    // We gone through all loaders, and the Image is not loaded ... so, error
+    if ( pImage == NULL )
+    {
+        NEError << "Fail to load Image '" << fileName << "'\n";
+        throw FileNotFoundException(fileName);
+    }
+
+    return pImage;
+}
+
+const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName, NE::ImageBank* pBank)
+{
+    const NE::Image* pImage = pBank->get(fileName);
+    if (pImage == NULL)
+    {
+        NE::Image* pNewImage = loadImage(fileName);
+        pBank->add(fileName,pNewImage);
+        pImage = pNewImage;
+    }
     return pImage;
 }

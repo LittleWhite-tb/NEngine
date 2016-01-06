@@ -42,8 +42,20 @@ namespace NE
 
     class ImageLoader : public Loader<NE::IImageLoader>
     {
+    private:
+        Colour m_transparencyColour;
+        bool m_hasTransparencyColour;
+
+        NE::Image* loadImage(const std::string& fileName);
+
     public:
-        const Image* loadImageFromFile(const std::string& fileName, const Colour& transparencyColour, ImageBank& bank);
+        ImageLoader():m_hasTransparencyColour(false) {}
+
+        const Image* loadImageFromFile(const std::string& fileName, ImageBank* pBank);
+
+        void setTransparencyColour(const Colour& transparencyColour) { m_transparencyColour = transparencyColour; m_hasTransparencyColour = true; }
+        const Colour& getTransparencyColour()const { return m_transparencyColour; }
+        void clearTransparencyColour() { m_hasTransparencyColour = false; }
     };
 }
 
@@ -52,14 +64,42 @@ namespace NE
  *
  * The ImageLoader class gives an interface to implement new platform specific Image loading functions.
  * To save loading time, the loader is using a bank to keep the Image already loaded. The second advantage of this, is that the memory deallocation has not to be done by the user.
+ *
+ * It is possible to specify a transparency colour through \a setTransparencyColour(). All following call to load an image
+ * will use this colour. You can get the colour set using \a getTransparencyColour() and remove this feature with \a clearTransparencyColour().
  */
 
-/*! \fn const Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName, const Colour& transparencyColour, ImageBank& bank)=0
+/*! \fn const NE::Image* NE::ImageLoader::loadImage(const std::string& fileName)
+ * \brief load a Image from a file.
+ * \param fileName the name of the file to load
+ * \return a pointer to the newly loaded \a Image
+ */
+
+/*! \fn NE::ImageLoader::ImageLoader()
+ * \brief Create the ImageLoader
+ * With no transparency colour.
+ */
+
+/*! \fn const NE::Image* NE::ImageLoader::loadImageFromFile(const std::string& fileName, ImageBank* pBank)
  * \brief load a Image from a file, or return the corresponding Image if already loaded
  * \param fileName the name of the file to load
  * \param transparencyColour the transparency colour to apply on the loaded image
  * \param bank the bank where to put the \a Image
  * \return a pointer to the newly loaded \a Image
-*/
+ */
+
+/*! \fn void NE::ImageLoader::setTransparencyColour(const Colour& transparencyColour)
+ * \brief Set a transparency colour to use while loading an image.
+ * \param transparencyColour the colour to use as transparent.
+ */
+
+/*! \fn const Colour& NE::ImageLoader::getTransparencyColour()const
+ * \brief Get the transparency colour.
+ * \return the colour used as transparent one while loading.
+ */
+
+/*! \fn void NE::ImageLoader::clearTransparencyColour()
+ * \brief Remove the use of transparency colour.
+ */
 
 #endif
